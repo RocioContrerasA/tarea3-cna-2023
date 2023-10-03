@@ -96,15 +96,15 @@ Preguntas
 # Pregunta 1
 Revisa el archivo Dockerfile en la carpeta users-svc y compáralo con el mismo archivo en la carpeta ws-server. ¿Qué te llama la atención? Ahora revisa la sentencia command para los respectivos servicios en el archivo docker-compose.yml. ¿Qué concluyes?
 
-RESPUESTA: el archivo Dockerfile de las carpetas users-svc y ws-server son idénticos. al revisar la sentencia command se puede observar que una de ellas ejecuta el servicio app.js y la otra al servicio index.js
+RESPUESTA: el archivo Dockerfile de las carpetas users-svc y ws-server son idénticos. al revisar la sentencia command se puede observar que una de ellas ejecuta el servicio app.js y la otra al servicio index.js, además, busca en un directorio los scripts de migración que no se hayan aplicado a la base de datos. Ejecuta los scripts en orden secuencial en la base de datos destino, aplicando actualizaciones necesarias para el esquema de la base de datos este sincronizado con la version.
 
 # Pregunta 2
 Revisa el archivo Dockerfile en la carpeta frontend. ¿Qué te llama la atención? ¿En qué es diferente de los otros archivos Dockerfile?
-RESPUESTA: crea un build directory con un production build de la app. Dentro del directorio build/static estarán los archivos javascript y CSS
+RESPUESTA: crea un build directory con un production build de la app. Dentro del directorio build/static estarán los archivos javascript y CSS, se utiliza para crear una imagen de contenedor Docker que contiene la aplicación Node.js construida y lista para ser utilizada por un servidor web Nginx. La primera etapa se encarga de construir la aplicación Node.js, y la segunda etapa prepara la imagen que incluye tanto la aplicación Node.js como Nginx para ser consumida.
 
 # Pregunta 3
 ¿Para qué sirve el servicio flyway? ¿Qué pasa al hacer docker ps con respecto a este servicio?
-RESPUESTA: Es una herramienta de código abierto que sirve para procesos de migración de bases de datos. Al ejecutar docker ps el servicio no aparece, porque se encuentra asociado a servicio de postgres.
+RESPUESTA: Es una herramienta de código abierto que sirve para procesos de migración de bases de datos. 
 
 # Pregunta 4
 ¿Cuantas imágenes se crean? ¿Cuántos contenedores están activos?
@@ -115,13 +115,13 @@ Deten los contenedores con docker-compose down, luego reinicia con docker-compos
 
 RESPUESTA: Los datos no se encuentran disponibles
 
-Baja los contenedres. Crea un volumen para postgres agregando estas sentencias en el servicio postgres:
+Baja los contenedores. Crea un volumen para postgres agregando estas sentencias en el servicio postgres:
  volumes:
    - ./data:/var/lib/postgresql/data
-Reinicia los contenedores. Explica qué pasa con la base de datos después de hacer esto.
+# Reinicia los contenedores. Explica qué pasa con la base de datos después de hacer esto.
 
-RESPUESTA: la base de datos no contiene datos
+RESPUESTA: la base de datos sigue sin contiene datos
 
-¿Qué pasa con la carpeta data, qué crees que contiene?
+# ¿Qué pasa con la carpeta data, qué crees que contiene?
 
-RESPUESTA: la carpeta data se crea despues de iniciar los contenedores producto de la configuración del volumen en el archivo de servicios. Esta carpeta contiene directorios y archivos de configuración relacionados con replicas de la base de datos.
+RESPUESTA: La carpeta contiene directorios y archivos de configuración relacionados con replicas de la base de datos, la carpeta data se crea despues de iniciar los contenedores de la configuración del archivo de servicios. 
